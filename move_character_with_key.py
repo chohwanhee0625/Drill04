@@ -2,7 +2,7 @@ from pico2d import *
 
 open_canvas()
 
-TUK_WHIDTH, TUK_HEIGHT = 1280, 1024
+TUK_WHIDTH, TUK_HEIGHT = 1280, 860
 open_canvas(TUK_WHIDTH, TUK_HEIGHT)
 tuk_ground = load_image('TUK_GROUND.png')
 character = load_image('cat.png')
@@ -57,8 +57,14 @@ while (running):
         frame = (frame + 1) % 8
     else:
         frame = (frame - 1) % 8
-    x += dir * 10
-    y += vert * 10
+
+    if (x <= TUK_WHIDTH and x >= 0 and y <= TUK_HEIGHT and y >= 0):
+        x += dir * 10
+        y += vert * 10
+    else:
+        x -= dir * 50
+        y -= vert * 50
+
     delay(0.05)
 
 close_canvas()
