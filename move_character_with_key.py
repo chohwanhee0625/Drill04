@@ -8,8 +8,7 @@ tuk_ground = load_image('TUK_GROUND.png')
 character = load_image('cat.png')
 
 def handle_events():
-    global running, dir
-    # fill here
+    global running, dir, vert
 
     events = get_events()
     for event in events:
@@ -20,6 +19,10 @@ def handle_events():
                 dir += 1
             elif event.key == SDLK_LEFT:
                 dir -= 1
+            if event.key == SDLK_UP:
+                vert += 1
+            elif event.key == SDLK_DOWN:
+                vert -= 1
             elif event.key == SDLK_ESCAPE:
                 running = False
         elif event.type == SDL_KEYUP:
@@ -27,13 +30,15 @@ def handle_events():
                 dir -= 1
             elif event.key == SDLK_LEFT:
                 dir += 1
-        # fill here
-
+            if event.key == SDLK_UP:
+                vert -= 1
+            elif event.key == SDLK_DOWN:
+                vert += 1
 
 running = True
 x, y = TUK_WHIDTH // 2, TUK_HEIGHT // 2
 frame = 0
-dir = 0
+dir, vert = 0, 0
 
 while (running):
     clear_canvas()
@@ -53,10 +58,8 @@ while (running):
     else:
         frame = (frame - 1) % 8
     x += dir * 10
+    y += vert * 10
     delay(0.05)
-
-# fill here
-
 
 close_canvas()
 
